@@ -191,6 +191,25 @@
         }
     });
 
+    $('.comment-delete-button').click(function(e){
+        e.preventDefault();
+        const deleteCommentButton = $(this);
+        const commentId = $(this).data('comment-id');
+        $.ajax({
+            url: `/items/${commentId}/delete_comment/`,
+            type: "POST",
+            data: {
+                'csrfmiddlewaretoken': '{{ csrf_token }}',
+            },
+            success: function(response) {
+                $(`#comment-${commentId}`).remove();
+            },
+            error: function(response) {
+                alert('오류가 발생했습니다.');
+            }
+        });
+    });
+
 </script>
     
 

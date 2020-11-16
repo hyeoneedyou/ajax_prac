@@ -91,4 +91,11 @@ def create_comment(request, post_id):
         'comment': rendered
     }
     return HttpResponse(json.dumps(context), content_type="application/json")    
-   
+
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    comment.delete()
+    context = {
+        'comment_id': comment_id,
+    } 
+    return HttpResponse(json.dumps(context), content_type="application/json")  
